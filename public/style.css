@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg-dark: #0b061a;
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --purple: #c084fc;
+  --violet: #a78bfa;
+  --blue: #38bdf8;
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background:
+    radial-gradient(circle at top left, #3b0764, transparent 40%),
+    radial-gradient(circle at bottom right, #1e3a8a, transparent 40%),
+    linear-gradient(135deg, #020617, #0b061a);
+  color: var(--text-main);
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* ===== Layout ===== */
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 60px 40px;
+}
+
+/* ===== Glass Card ===== */
+
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* ===== Dashboard Action Links ===== */
+
+.card a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+
+  color: #e5e7eb;
+  padding: 14px 18px;
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.card a:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(192, 132, 252, 0.25),
+    rgba(56, 189, 248, 0.25)
+  );
+  border-color: rgba(192, 132, 252, 0.6);
+  transform: translateX(4px);
+}
+
+/* Optional: icon glow on hover */
+.card a:hover span,
+.card a:hover {
+  text-shadow: 0 0 10px rgba(192, 132, 252, 0.6);
+}
+
+/* Space between links without <br> dependency */
+.card a + a {
+  margin-top: 14px;
+}
+
+
+/* ===== Headings ===== */
+
+h1, h2 {
+  margin-top: 0;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+/* ===== Inputs ===== */
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus {
+  border-color: var(--violet);
+  box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ===== Buttons ===== */
+
+button {
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: #020617;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  box-shadow:
+    0 10px 25px rgba(168, 85, 247, 0.35);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 15px 35px rgba(168, 85, 247, 0.55);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* ===== Navigation ===== */
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* ===== Badge ===== */
+
+.badge {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 12px;
+  color: var(--text-main);
+  backdrop-filter: blur(10px);
+}
+
+hr {
+  border: none;
+  height: 1px;
+  margin: 24px 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(192, 132, 252, 0.6),
+    transparent
+  );
+}

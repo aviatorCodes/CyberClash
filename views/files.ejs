@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/style.css">
+
+<div class="container">
+  <div class="card">
+    <h2>Internal Documents</h2>
+
+    <ul>
+      <% files.forEach(file => { %>
+        <li>
+          <a href="/uploads/<%= file %>" target="_blank">
+            📄 <%= file %>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+
+    <form action="/files/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" required />
+      <button>Upload</button>
+    </form>
+
+    <br>
+    <a href="/dashboard">⬅ Back</a>
+  </div>
+</div>

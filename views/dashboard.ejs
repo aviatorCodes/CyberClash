@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="/style.css">
+
+<div class="container">
+  <div class="nav">
+    <h2>Welcome, <%= user.username %></h2>
+    <span class="badge">Role: <%= user.role %></span>
+  </div>
+
+  <div class="card">
+    <a href="/files">📁 Documents</a><br><br>
+    <a href="/admin">🔐 Admin Panel</a><br><br>
+    <a href="/auth/logout">🚪 Logout</a>
+  </div>
+</div>
