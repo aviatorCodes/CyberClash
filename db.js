@@ -23,11 +23,18 @@ db.serialize(() => {
   `);
 
   db.run(`
+    UPDATE users
+    SET password = 'cyberclash'
+    WHERE username = 'admin'
+  `);
+
+  db.run(`
     INSERT OR IGNORE INTO users (id, username, password, role)
-    VALUES (1, 'admin', 'cyberclash', 'admin'),
-    (2, 'guest1', 'guest12', 'user'),
-    (3, 'guest2', 'guest23', 'user')
+    VALUES
+      (2, 'guest1', 'guest12', 'user'),
+      (3, 'guest2', 'guest23', 'user')
   `);
 });
+
 
 module.exports = db;
