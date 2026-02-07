@@ -7,38 +7,52 @@ router.get("/login", (req, res) => {
   res.render("login", { error: null });
 });
 
-// ⚠️ INTENTIONALLY VULNERABLE LOGIN (CTF PURPOSES)
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
 
   // Reset riddle access on every login
   req.session.filesUnlocked = false;
 
-  // Legacy authentication logic (DO NOT USE IN PRODUCTION)
-  // TODO: Replace with prepared statements in future
-  const query = `
-    SELECT * FROM users
-    WHERE username = '${username}'
-    AND password = '${password}'
-  `;
+  // 1️⃣ SAFE: Check if username exists
+  db.get(
+    "SELECT * FROM users WHERE username = ?",
+    [username],
+    (err, existingUser) => {
+      if (err) {
+        return res.send("Database error: " + err.message);
+      }
 
-  console.log("DEBUG QUERY:", query);
+      if (!existingUser) {
+        return res.render("login", {
+          error: "Invalid username or password"
+        });
+      }
 
-  db.get(query, (err, user) => {
-    if (err) {
-      // Error leakage on purpose
-      return res.send("Database error: " + err.message);
+      // 2️⃣ INTENTIONALLY VULNERABLE (but scoped)
+      const query = `
+        SELECT * FROM users
+        WHERE id = ${existingUser.id}
+        AND password = '${password}'
+      `;
+
+      console.log("DEBUG QUERY:", query);
+
+      db.get(query, (err, user) => {
+        if (err) {
+          return res.send("Database error: " + err.message);
+        }
+
+        if (user) {
+          req.session.user = user;
+          return res.redirect("/dashboard");
+        }
+
+        res.render("login", {
+          error: "Invalid username or password"
+        });
+      });
     }
-
-    if (user) {
-      req.session.user = user;
-      return res.redirect("/dashboard");
-    }
-
-    res.render("login", {
-      error: "Invalid username or password"
-    });
-  });
+  );
 });
 
 // Logout
