@@ -1,7 +1,6 @@
 const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
 
-
 const dbPath = path.join(__dirname, "database.db");
 
 const db = new sqlite3.Database(dbPath, (err) => {
@@ -16,16 +15,15 @@ db.serialize(() => {
   db.run(`
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      username TEXT,
+      username TEXT UNIQUE,
       password TEXT,
       role TEXT
     )
   `);
 
   db.run(`
-    UPDATE users
-    SET password = 'cyberclash'
-    WHERE username = 'AdM1N'
+    INSERT OR REPLACE INTO users (id, username, password, role)
+    VALUES (1, 'AdM1N', 'cyberclash', 'admin')
   `);
 
   db.run(`
@@ -35,6 +33,5 @@ db.serialize(() => {
       (3, 'guest2', 'guest23', 'user')
   `);
 });
-
 
 module.exports = db;
