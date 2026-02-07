@@ -25,7 +25,7 @@ db.serialize(() => {
   db.run(`
     UPDATE users
     SET password = 'cyberclash'
-    WHERE username = 'admin'
+    WHERE username = 'AdM1N'
   `);
 
   db.run(`
