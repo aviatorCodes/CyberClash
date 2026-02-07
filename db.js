@@ -21,16 +21,31 @@ db.serialize(() => {
     )
   `);
 
+  // 👑 Ensure admin always exists
   db.run(`
     INSERT OR REPLACE INTO users (id, username, password, role)
     VALUES (1, 'AdM1N', 'cyberclash', 'admin')
   `);
 
+  // 🔄 Force-update guest usernames (case-sensitive)
+  db.run(`
+    UPDATE users
+    SET username = 'gU3st1'
+    WHERE id = 2
+  `);
+
+  db.run(`
+    UPDATE users
+    SET username = 'gU3st2'
+    WHERE id = 3
+  `);
+
+  // 👥 Insert guests if DB was empty
   db.run(`
     INSERT OR IGNORE INTO users (id, username, password, role)
     VALUES
-      (2, 'guest1', 'guest12', 'user'),
-      (3, 'guest2', 'guest23', 'user')
+      (2, 'gU3st1', 'guest12', 'user'),
+      (3, 'gU3st2', 'guest23', 'user')
   `);
 });
 
